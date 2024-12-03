@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Success</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Smooth gradient */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 90%;
+            max-width: 600px;
+            margin: 0;
+        }
+
+        ul li {
+            background: #ffffff;
+            color: #333;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #6a11cb;
+        }
+
+        ul ul {
+            list-style: disc inside;
+            margin-top: 10px;
+        }
+
+        ul ul li {
+            background: none;
+            color: #333;
+            padding: 5px;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #ff7e5f;
+            color: white;
+            padding: 12px 24px;
+            margin: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        a:hover {
+            background-color: #feb47b;
+        }
+
+        .no-questions {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-size: 1.1rem;
+        }
+
+        .button-group {
+            margin-top: 25px;
+        }
+
+        /* Media Queries for better mobile view */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            ul li {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            a {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .no-questions {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>🎉 File Uploaded Successfully! 🎉</h1>
+
+        {% if parsed_data %}
+            <h2>Extracted Questions:</h2>
+            <ul>
+                {% for item in parsed_data %}
+                    <li>
+                        <strong>{{ item.question_label }}:</strong> {{ item.question }}<br>
+                        
+                        {% if item.choices %}
+                            <strong>Choices:</strong>
+                            <ul>
+                                {% for choice in item.choices %}
+                                    <li>{{ choice }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        
+                        {% if item.answer %}
+                            <strong>Answer:</strong> {{ item.answer }}
+                        {% else %}
+                            <strong>Answer:</strong> Not available
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-questions">No questions were found in the uploaded file. Please check the content of the file.</p>
+        {% endif %}
+
+        <div class="button-group">
+            <a href="{% url 'file_upload' %}">Upload Another File</a>
+            <a href="/">Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>

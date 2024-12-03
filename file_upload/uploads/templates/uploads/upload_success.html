@@ -1,0 +1,69 @@
+<!-- uploads/upload_success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Success</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 10px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .success-message {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #218838;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-message">
+        <h1>🎉 File Uploaded Successfully! 🎉</h1>
+        <div class="button-group">
+            <a href="{% url 'file_upload' %}">Upload Another File</a>
+            <a href="/">Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>
