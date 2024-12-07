@@ -1,39 +1,66 @@
-<!-- uploads/upload_success.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Success</title>
+    <title>Upload Success & Analysis Results</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #4facfe, #00f2fe);
             color: #ffffff;
             margin: 0;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
         }
 
         h1 {
             font-size: 2.5rem;
-            margin: 0;
-            padding: 20px;
+            margin: 20px 0;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
             border-radius: 10px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
         }
 
-        .success-message {
-            max-width: 600px;
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        ul li {
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        ul li ul {
+            margin: 10px 0 0 20px;
+            list-style-type: disc;
+        }
+
+        ul li ul li {
+            background: none;
+            margin: 5px 0;
+            padding: 0;
+            box-shadow: none;
+            text-shadow: none;
         }
 
         a {
@@ -53,15 +80,54 @@
         }
 
         .button-group {
-            margin-top: 20px;
+            margin-top: 30px;
+        }
+
+        .content-container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
-    <div class="success-message">
-        <h1>🎉 File Uploaded Successfully! 🎉</h1>
+    <div class="content-container">
+        <h1>🎉 File Uploaded and Analyzed Successfully! 🎉</h1>
+
+        <h2>Extracted Questions</h2>
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <strong>{{ question.question }}</strong>
+                    {% if question.choices %}
+                        <ul>
+                            {% for choice in question.choices %}
+                                <li>{{ choice }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Question Types</h2>
+        <ul>
+            {% for qtype in types %}
+                <li>{{ qtype }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Identified Topics</h2>
+        <ul>
+            {% for topic in topics %}
+                <li>{{ topic }}</li>
+            {% endfor %}
+        </ul>
+
         <div class="button-group">
-            <a href="{% url 'file_upload' %}">Upload Another File</a>
+            <a href="{% url 'file_upload_view' %}">Upload Another File</a>
             <a href="/">Return to Home</a>
         </div>
     </div>
